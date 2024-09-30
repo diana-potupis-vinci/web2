@@ -188,6 +188,12 @@ router.put("/:id", (req, res) => {
   }
 
   const { title, director, duration, budget, description, imageUrl } = body as NewFilm;
+  
+  const existingFilm = films.find((film) => film.title === title && film.director === director);
+
+  if (existingFilm) {
+    return res.sendStatus(409);
+  }
 
   const filmIndex = films.findIndex((film) => film.id === id);
 
