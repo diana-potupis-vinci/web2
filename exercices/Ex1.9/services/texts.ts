@@ -2,7 +2,7 @@ import path from "node:path";
 import {Text, NewText} from "../types";
 import { v4 as uuidv4 } from 'uuid';
 import { parse, serialize } from "../utils/json";
-const jsonDbPath = path.join(__dirname, "/../data/films.json");
+const jsonDbPath = path.join(__dirname, "/../data/texts.json");
 
 const defaultTexts: Text[] = [
     {
@@ -68,6 +68,9 @@ function updateOneText(id: string, newText: NewText): Text | undefined {
     const textIndex = texts.findIndex((text) => text.id === id);
     if (textIndex === -1) {
         return undefined;
+    }
+    if (!["easy", "medium", "hard"].includes(newText.level)) {
+        throw new Error("Invalid level value");
     }
     const updatedText = { id: id, ...newText };
     texts[textIndex] = updatedText;

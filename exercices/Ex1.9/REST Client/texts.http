@@ -1,0 +1,38 @@
+### Read all films with File variable
+@baseUrl = http://localhost:3000
+GET {{baseUrl}}/texts
+
+### Read all texts with level equal to easy
+GET {{baseUrl}}/texts/?level=easy
+### Read a single text
+GET {{baseUrl}}/texts/7556219e-a737-4ccf-aa8c-bee40e9d2fb1
+
+### Create a text
+POST {{baseUrl}}/texts
+Content-Type: application/json
+    
+    {
+        "content" : "This is a new text",
+        "level" : 1
+    }
+
+### Create a text
+POST {{baseUrl}}/texts
+Content-Type: application/json
+    
+    {
+        "content" : "This is a new text",
+        "level" : "medium"
+    }
+
+### Update the text identified by 31fc1828-6a3d-4c57-b36f-a74ed4dee2b3
+PUT {{baseUrl}}/texts/31fc1828-6a3d-4c57-b36f-a74ed4dee2b3
+Content-Type: application/json
+
+{
+    "content" : "Citronnade",
+    "level" : "medium"
+}
+
+### Delete a text
+DELETE {{baseUrl}}/texts/5d124770-e3e6-4622-a19a-0c957550d301
