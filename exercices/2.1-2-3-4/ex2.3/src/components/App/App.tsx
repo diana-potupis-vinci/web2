@@ -1,13 +1,11 @@
-
-import Cinema  from "../Cinema";
+import Cinema from "../Cinema";
 import PageTitle from "../PageTitle";
-
 
 const pageTitle = "Informations sur les films dans les cinémas";
 
-  const cinema1Name = "UGC DeBrouckère";
+const cinema1Name = "UGC DeBrouckère";
 
-  const moviesCinema1 = [
+const moviesCinema1 = [
   {
     title: "HAIKYU-THE DUMPSTER BATTLE",
     director: "Susumu Mitsunaka",
@@ -45,8 +43,7 @@ const moviesCinema2 = [
     title: "THE IRISHMAN",
     director: "Martin Scorsese",
   },
-]; 
-
+];
 
 const App = () => {
   return (
