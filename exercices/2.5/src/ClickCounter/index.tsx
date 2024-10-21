@@ -1,12 +1,12 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 interface ClickCounterProps {
   title: string;
-  message: string;
-  hoverMessage: string;
+  message?: string;
+  hoverMessage?: string;
 }
 
-const ClickCounter= ({ title, message, hoverMessage }: ClickCounterProps) => {
+const ClickCounter = ({ title, message, hoverMessage }: ClickCounterProps) => {
   const [count, setCount] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -15,17 +15,21 @@ const ClickCounter= ({ title, message, hoverMessage }: ClickCounterProps) => {
   };
 
   const handleMouse = () => {
-    setIsHovered(isHovered => !isHovered);
+    setIsHovered((isHovered) => !isHovered);
   };
 
   return (
     <div>
       <h2>{title}</h2>
-      <button onClick={handleClick} onMouseEnter={handleMouse} onMouseLeave={handleMouse}>count is {count}
-        
+      <button
+        onClick={handleClick}
+        onMouseEnter={handleMouse}
+        onMouseLeave={handleMouse}
+      >
+        count is {count}
       </button>
-      {count >= 10 && <p>{message}</p>}
-        {isHovered && <p>{hoverMessage}</p>}
+      {count >= 10 && <p>{message ? message : "no message."}</p>}
+      {isHovered && <p>{hoverMessage ?? "no hover message"}</p>}
     </div>
   );
 };
