@@ -1,8 +1,6 @@
 interface Pizza {
-    id: number;
-    title: string;
-    content: string;
-  }
-  
-  export type { Pizza };
-  
+  id: number;
+  title: string;
+  content: string;
+}
+export type { Pizza };
