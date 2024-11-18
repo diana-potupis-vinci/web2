@@ -4,6 +4,7 @@ import App from "./components/App/App.tsx";
 import HomePage from "./components/Pages/HomePage.tsx";
 import CinemaPage from "./components/Pages/CinemaPage.tsx";
 import MovieListPage from "./components/Pages/MovieListPage.tsx";
+import AddMoviePage from "./components/Pages/AddMoviePage.tsx";
 import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: "movielist",
         element: <MovieListPage />,
+      },
+      {
+        path: "addmovie",
+        element: <AddMoviePage />,
       },
     ],
   },
