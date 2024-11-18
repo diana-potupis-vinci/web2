@@ -1,6 +1,5 @@
 import { useState, SyntheticEvent } from "react";
 import {
-  unstable_HistoryRouter,
   useNavigate,
   useOutletContext,
 } from "react-router-dom";
