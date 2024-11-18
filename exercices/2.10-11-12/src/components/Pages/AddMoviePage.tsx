@@ -1,8 +1,5 @@
 import { useState, SyntheticEvent } from "react";
-import {
-  useNavigate,
-  useOutletContext,
-} from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import { MovieContext } from "../../types";
 
 const AddMoviePage = () => {
@@ -38,7 +35,7 @@ const AddMoviePage = () => {
   const handleDurationChange = (e: SyntheticEvent) => {
     const durationInput = e.target as HTMLInputElement;
     console.log("change in durationInput:", durationInput.value);
-    setDuration(durationInput.value ? parseInt(durationInput.value) : 15);
+    setDuration(durationInput.value ? parseInt(durationInput.value) : 60);
   };
 
   const handleDescriptionChange = (e: SyntheticEvent) => {
@@ -50,7 +47,7 @@ const AddMoviePage = () => {
   const handleBudgetChange = (e: SyntheticEvent) => {
     const budgetInput = e.target as HTMLInputElement;
     console.log("change in budgetInput:", budgetInput.value);
-    setBudget(budgetInput.value ? parseInt(budgetInput.value) : undefined);
+    setBudget(budgetInput.value ? parseInt(budgetInput.value) : 200000);
   };
 
   const handleLinkChange = (e: SyntheticEvent) => {
@@ -88,7 +85,8 @@ const AddMoviePage = () => {
           id="duration"
           name="duration"
           onChange={handleDurationChange}
-          min="1"
+          placeholder="60"
+          min="60"
           required
         />
         <label htmlFor="description">Description</label>
@@ -102,9 +100,11 @@ const AddMoviePage = () => {
         <label htmlFor="budget">Budget</label>
         <input
           value={budget}
-          type="text"
+          type="number"
           id="budget"
           name="budget"
+          placeholder="200000"
+          min="200000"
           onChange={handleBudgetChange}
         />
         <label htmlFor="link">Link</label>
