@@ -7,15 +7,18 @@ const AddMoviePage = () => {
   const { addMovie }: MovieContext = useOutletContext();
 
   const navigate = useNavigate();
-  const [title, setTitle] = useState("");
-  const [director, setDirector] = useState("");
-  const [duration, setDuration] = useState<number>(1);
-  const [description, setDescription] = useState<string | undefined>("");
+  const [title, setTitle] = useState<string | undefined>(undefined);
+  const [director, setDirector] = useState<string | undefined>(undefined);
+  const [duration, setDuration] = useState<number | undefined>(undefined);
+  const [description, setDescription] = useState<string | undefined>(undefined);
   const [budget, setBudget] = useState<number | undefined>(undefined);
-  const [link, setLink] = useState<string | undefined>("");
+  const [link, setLink] = useState<string | undefined>(undefined);
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
+    if (!title || !director || !duration) {
+      return;
+    }
     addMovie({ title, director, duration, description, budget, link });
     navigate("/movielist");
   };
@@ -35,19 +38,28 @@ const AddMoviePage = () => {
   const handleDurationChange = (e: SyntheticEvent) => {
     const durationInput = e.target as HTMLInputElement;
     console.log("change in durationInput:", durationInput.value);
-    setDuration(durationInput.value ? parseInt(durationInput.value) : 60);
+    const intValue = parseInt(durationInput.value);
+    if (!isNaN(intValue) && intValue >= 60) {
+      setDuration(intValue);
+    }
   };
 
   const handleDescriptionChange = (e: SyntheticEvent) => {
     const descriptionInput = e.target as HTMLInputElement;
     console.log("change in descriptionInput:", descriptionInput.value);
-    setDescription(descriptionInput.value);
+    if (descriptionInput.value !== "") {
+      setDescription(descriptionInput.value);
+    }
+    //setDescription(descriptionInput.value);
   };
 
   const handleBudgetChange = (e: SyntheticEvent) => {
     const budgetInput = e.target as HTMLInputElement;
     console.log("change in budgetInput:", budgetInput.value);
-    setBudget(budgetInput.value ? parseInt(budgetInput.value) : 200000);
+    const intValue = parseInt(budgetInput.value);
+    if (!isNaN(intValue) && intValue >= 200000) {
+      setBudget(intValue);
+    }
   };
 
   const handleLinkChange = (e: SyntheticEvent) => {
@@ -62,7 +74,6 @@ const AddMoviePage = () => {
       <form onSubmit={handleSubmit}>
         <label htmlFor="movie">Movie</label>
         <input
-          value={title}
           type="text"
           id="title"
           name="title"
@@ -71,7 +82,6 @@ const AddMoviePage = () => {
         />
         <label htmlFor="director">Director</label>
         <input
-          value={director}
           type="text"
           id="director"
           name="director"
@@ -80,18 +90,15 @@ const AddMoviePage = () => {
         />
         <label htmlFor="duration">Duration</label>
         <input
-          value={duration}
           type="number"
           id="duration"
           name="duration"
           onChange={handleDurationChange}
           placeholder="60"
           min="60"
-          required
         />
         <label htmlFor="description">Description</label>
         <input
-          value={description}
           type="text"
           id="description"
           name="description"
@@ -99,7 +106,6 @@ const AddMoviePage = () => {
         />
         <label htmlFor="budget">Budget</label>
         <input
-          value={budget}
           type="number"
           id="budget"
           name="budget"
@@ -108,13 +114,7 @@ const AddMoviePage = () => {
           onChange={handleBudgetChange}
         />
         <label htmlFor="link">Link</label>
-        <input
-          value={link}
-          type="text"
-          id="link"
-          name="link"
-          onChange={handleLinkChange}
-        />
+        <input type="text" id="link" name="link" onChange={handleLinkChange} />
         <button type="submit">Ajouter</button>
       </form>
     </div>
