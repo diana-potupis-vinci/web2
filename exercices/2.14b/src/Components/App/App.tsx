@@ -1,13 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import RandomDog from "../RandomDog";
 import "./App.css";
 
 function App() {
   const [keys, setKeys] = useState([0, 1, 2]);
 
-  const fetchImages = () => {
-    setKeys([Math.random(), Math.random(), Math.random()]);
-  };
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setKeys([Math.random(), Math.random(), Math.random()]);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div>
@@ -15,9 +18,6 @@ function App() {
       <RandomDog key={keys[0]} />
       <RandomDog key={keys[1]} />
       <RandomDog key={keys[2]} />
-      <div>
-        <button onClick={fetchImages}>Fetch!</button>
-      </div>
     </div>
   );
 }
