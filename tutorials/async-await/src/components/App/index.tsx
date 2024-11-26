@@ -54,9 +54,29 @@ const App = () => {
     }
   };
 
-  const addPizza = (newPizza: NewPizza) => {
-    const pizzaAdded = { ...newPizza, id: nextPizzaId(pizzas) };
-    setPizzas([...pizzas, pizzaAdded]);
+  const addPizza = async (newPizza: NewPizza) => {
+    try {
+      const options = {
+        method: "POST",
+        body: JSON.stringify(newPizza),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+
+      const response = await fetch("http://localhost:3000/pizzas", options); // fetch retourne une "promise" => on attend la réponse
+
+      if (!response.ok)
+        throw new Error(
+          `fetch error : ${response.status} : ${response.statusText}`
+        );
+
+      const createdPizza = await response.json(); // json() retourne une "promise" => on attend les données
+
+      setPizzas([...pizzas, createdPizza]);
+    } catch (err) {
+      console.error("AddPizzaPage::error: ", err);
+    }
   };
 
   const handleHeaderClick = () => {
@@ -95,9 +115,9 @@ const App = () => {
   );
 };
 
-const nextPizzaId = (pizzas: Pizza[]) => {
+/*const nextPizzaId = (pizzas: Pizza[]) => {
   const ids = pizzas.map((pizza) => pizza.id);
   return Math.max(...ids) + 1;
-};
+};*/
 
 export default App;
