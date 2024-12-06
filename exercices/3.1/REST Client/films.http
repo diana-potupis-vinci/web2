@@ -1,0 +1,79 @@
+### Read all films with File variable
+@baseUrl = http://localhost:3000
+GET {{baseUrl}}/films
+
+### Read a single film
+GET {{baseUrl}}/films/2
+
+### Read all films zith duration more or equal to 130 €
+GET {{baseUrl}}/films/?minimum-duration=140
+
+### Create a film
+##### Define a request variable named admin :
+# @name admin
+POST {{baseUrl}}/auths/login
+Content-Type: application/json
+
+{
+    "username":"admin",
+    "password":"admin"
+}
+
+### Login the manager user
+POST {{baseUrl}}/auths/login
+Content-Type: application/json
+
+{
+    "username":"manager",
+    "password":"manager"
+}
+
+### Create a film with the admin token
+POST {{baseUrl}}/films
+Content-Type: application/json
+Authorization: {{admin.response.body.token}}
+
+{
+    "title": "Interstellarаукау",
+    "director": "Christopher Nolanкмукмпукмп",
+    "duration": 169,
+    "budget": 165,
+    "description": "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
+    "imageUrl": "https://example.com/interstellar.jpg"
+}
+
+### Delete a film
+DELETE {{baseUrl}}/films/5
+Authorization: {{admin.response.body.token}}
+
+### Update the film identified by 4
+PATCH {{baseUrl}}/films/4
+Content-Type: application/json
+Authorization: {{admin.response.body.token}}
+
+{
+    "title":"Citronnade"
+}
+
+### Update the film identified by 4
+PATCH {{baseUrl}}/films/4
+Content-Type: application/json
+Authorization: {{admin.response.body.token}}
+
+{
+    "budget":150
+}
+
+### Update the film identified by 2
+PUT {{baseUrl}}/films/2
+Content-Type: application/json
+Authorization: {{admin.response.body.token}}
+
+{
+    "title": "Inception",
+    "director": "Christopher Nolan",
+    "duration": 148,
+    "budget": 150,
+    "description": "A thief who steals corporate secrets...",
+    "imageUrl": "https://example.com/inception.jpg"
+}
