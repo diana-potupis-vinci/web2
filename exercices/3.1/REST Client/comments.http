@@ -1,0 +1,30 @@
+### Read all comments with File variable
+@baseUrl = http://localhost:3000
+GET {{baseUrl}}/comments
+
+#### First login as the user
+##### Define a request variable named user :
+# @name user
+POST {{baseUrl}}/auths/login
+Content-Type: application/json
+
+{
+    "username":"user",
+    "password":"user"
+}
+
+
+#### Create a comment  with token
+POST {{baseUrl}}/comments
+Content-Type: application/json
+Authorization: {{user.response.body.token}}
+
+{
+    "filmId": 2,
+    "content": "Wow, nice movie!"
+    
+}
+
+#### Delete a comment
+DELETE {{baseUrl}}/comments/3
+Authorization: {{user.response.body.token}}

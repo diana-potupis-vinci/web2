@@ -28,6 +28,24 @@ Content-Type: application/json
     "password":"manager"
 }
 
+### Create the user
+POST {{baseUrl}}/auths/register
+Content-Type: application/json
+
+{
+    "username":"user",
+    "password":"user"
+}
+
+### Login the user
+POST {{baseUrl}}/auths/login
+Content-Type: application/json
+
+{
+    "username":"user",
+    "password":"user"
+}
+
 ### Login the manager user
 POST {{baseUrl}}/auths/login
 Content-Type: application/json
